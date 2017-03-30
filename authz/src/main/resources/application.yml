@@ -1,0 +1,26 @@
+server:
+  port: 9999
+  contextPath: /uaa
+  
+security:
+  user:
+    password: none
+  
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+        
+facebook:
+  appKey: 1896232807325142
+  appSecret: 64096be669990079e7120465bc65de01
+  
+token:
+  secret: willremvoeit
+  
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    showSql: true 
