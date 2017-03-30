@@ -1,0 +1,44 @@
+debug: true
+
+server:
+ port: 8080
+ 
+spring:
+  aop:
+    proxy-target-class: true
+
+
+security:
+  user:
+    password: none
+  oauth2:
+    client:
+      accessTokenUri: http://localhost:9999/uaa/oauth/token
+      userAuthorizationUri: http://localhost:9999/uaa/oauth/authorize
+      clientId: acme
+      clientSecret: acmesecret
+    resource:
+      jwt:
+        keyValue: |
+          -----BEGIN PUBLIC KEY-----
+          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhweFk60zYAkAEzvFeoNPswrADUx2VWADMDqo5oLH7oX5PRo1UBlYOSMISWIpRhYPNd2Drsf3rqRlNUjiT/SZhLj9jXI+2C62QsHX3B7XDQwlRfOOR9ldxZvbrM8//sfEHH25188/d15vlwFy466EmI7Iz3ELRSxRNbGvg2R/0RrPmTsavails/6RRiKSlrPIDbCrxEEJLrZi/zPDF4JL3n/Zm6iB2SeOB82/an0HVW+ElExT+gqINlLYjQtx24esQFct0J4rgRh7u0zUo12bUYToyMYrQxotmD9JQuT029nH4ADJhGgVDsxOZDFHVaO0xdJjjmMmOJ1Re/ghO6P8+QIDAQAB
+          -----END PUBLIC KEY-----
+
+zuul:
+  routes:
+    idpapi:
+      path: /idpapi/v1/**
+      url: http://localhost:9000/idpapi/v1/
+    user:
+      path: /user/**
+      url: http://localhost:9999/uaa/user
+    eduui:
+      path: /eduui/**
+      url: http://localhost:8081    
+    adminui:
+      path: /adminui/**
+      url: http://localhost:8082
+
+logging:
+  level:
+    org.springframework.security: DEBUG
