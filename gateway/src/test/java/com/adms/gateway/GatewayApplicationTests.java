@@ -1,4 +1,4 @@
-package com.adms.authz.base.main;
+package com.adms.gateway;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
