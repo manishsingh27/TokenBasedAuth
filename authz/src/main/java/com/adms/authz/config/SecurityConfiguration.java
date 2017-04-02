@@ -54,9 +54,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http
 			.formLogin().loginPage("/login").permitAll()
 		.and()
-			.requestMatchers().antMatchers("/login", "/oauth/authorize", "/oauth/confirm_access", "/auth/**")
+			.requestMatchers().antMatchers("/login", "/oauth/authorize", "/oauth/confirm_access", "/auth/**", "/register")
 		.and()
-			.authorizeRequests().anyRequest().authenticated().and()
+			.authorizeRequests()
+			.antMatchers("/register").permitAll()
+			.anyRequest().authenticated().and()
 			// add custom authentication filter for complete stateless JWT based authentication
 			.addFilterBefore(statelessAuthenticationFilter, AbstractPreAuthenticatedProcessingFilter.class)
 
