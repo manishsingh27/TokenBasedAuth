@@ -45,7 +45,7 @@
 					<a class="redFont frgtPwd pull-right" href="/login/recover">Forgot
 						password?</a>
 					
-					
+				
 				</form>
 
 				<div class="sociallogin">

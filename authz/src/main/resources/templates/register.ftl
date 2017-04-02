@@ -46,7 +46,6 @@
 					<div layout-gt-xs="row">
 
 
-
 						<md-input-container class="md-block" flex-gt-sm>
 						<label>Gender</label> <md-select ng-model="user.state">
 						<md-option value="male"> Male </md-option> <md-option
