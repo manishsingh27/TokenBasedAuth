@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 body {
 	background-color: #393944;
 }
@@ -75,83 +74,4 @@ h2.strikeThrough {
 
 .pull-right {
 	float: right;
-=======
-body {
-	background-color: #393944;
-}
-
-md-toolbar.toolbarOuter {
-	min-height: 40px
-}
-
-.sociallogin {
-	margin-top: 11%
-}
-.loginWrapper{
-	overflow:hidden;
-	
-}
-
-h2.strikeThrough {
-	position: relative;
-	text-align: center;
-	color: #a8a8a8;
-	font-size: 13px;
-	font-style: italic;
-	font-weight: normal;
-	z-index: 1;
-}
-
-.toolbarInner {
-	height: 40px
-}
-
-.frgtPwd {
-	margin-top: 2%;
-	font-size: 14px
-}
-
-.signUpBtn {
-	font-size: 15px;
-	font-weight: 600; padding : 2%;
-	text-transform: none;
-	padding: 2%;
-}
-
-.wdth100Per {
-	width: 100%
-}
-
-.redFont {
-	color: rgb(255, 94, 65);
-}
-
-.alignCenter {
-	text-align: center;
-}
-
-.alignRight {
-	text-align: right;
-}
-
-.alignLeft {
-	text-align: left;
-}
-
-.fnt16 {
-	font-size: 16px;
-}
-
-.fntWgt600 {
-	
-	font-weight: 600
-}
-
-.mrgnTop10Per {
-	margin-top: 8%
-}
-
-.pull-right {
-	float: right;
->>>>>>> refs/remotes/origin/master
 }
