@@ -26,8 +26,8 @@ public class AuthorizationConfiguration extends AuthorizationServerConfigurerAda
 	public JwtAccessTokenConverter jwtAccessTokenConverter() {
 		JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
 		KeyPair keyPair = new KeyStoreKeyFactory(
-				new ClassPathResource("sdtnetstore.jks"), "stddream1!@go".toCharArray())
-				.getKeyPair("stdntalias");
+				new ClassPathResource("keystore.jks"), "foobar".toCharArray())
+				.getKeyPair("test");
 		converter.setKeyPair(keyPair);
 		return converter;
 	}

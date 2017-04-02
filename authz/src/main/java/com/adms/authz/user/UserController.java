@@ -7,10 +7,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.adms.authz.user.repo.User;
 import com.adms.authz.user.repo.UserRepository;
@@ -55,6 +57,21 @@ public class UserController {
 	@RequestMapping(value = "/admin/api/user", method = RequestMethod.GET)
 	public List<User> list() {
 		return userRepository.findAll();
+	}
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	public ModelAndView registerPage(ModelAndView mav) {
+		mav.setViewName("register");
+		User user = new User();
+		mav.addObject("user", user);
+		return mav;
+	}
+	
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	public ModelAndView registerUser(ModelAndView mav,@ModelAttribute("user") User user) {
+		//userRepository.saveAndFlush(user);
+		mav.setViewName("login");
+		mav.addObject("user", user);
+		return mav;
 	}
 
 }

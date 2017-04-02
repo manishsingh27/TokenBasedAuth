@@ -27,6 +27,9 @@ public class UserService implements SocialUserService {
 		return checkUser(user);
 	}
 
+    public void save(User user) {
+        userRepo.save(user);
+    }
 	@Override
 	@Transactional(readOnly = true)
 	public User loadUserByUsername(String username) {
