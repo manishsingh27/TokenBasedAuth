@@ -15,64 +15,60 @@
 				flex-sm="70" flex-gt-sm="55">
 				<span class="alignLeft" flex="33"><p
 						class="redFont fnt16 fntWgt600">Student +</p></span> <span
-					class="alignCenter" flex="33"><p class="fnt16">Log In</p></span> 
-					<!-- <span
+					class="alignCenter" flex="33"><p class="fnt16">Sign Up</p></span>
+				<!-- <span
 					class="alignRight" flex="33"><a class="btn" 
 						class="redFont fnt16 fntWgt600 alignRight">Sign Up</a></span> -->
-						<span
-					class="alignRight" flex="33"><a href="register">
-						<md-button class="redFont signUpBtn">Sign Up</md-button></a>
-						</span>
+				<span class="alignRight" flex="33"><a href="login"> <md-button
+						class="redFont signUpBtn">Log In</md-button></a>
+				</span>
 			</div>
 
 		</div>
 		</md-toolbar>
 	</header>
 	<section>
-		<div class="" layout="row" layout-align="center center">
-			<md-card flex-xs="90" flex-sm="70" flex-gt-sm="55"> <md-content class="loginWrapper"
-				layout-padding layout="row" layout-align="center">
-			<div flex="80">
-				<form name="userForm" action="login" method="post">
+		<div layout="row" layout-align="center center">
+			<md-card flex-xs="90" flex-sm="70" flex-gt-sm="55"> <md-content
+				class="loginWrapper" layout-padding layout="row"
+				layout-align="center">
+			<div flex="80" >
+				<form name="userForm" action="register" method="post">
 				<input type="hidden" id="csrf_token" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 					<md-input-container class="md-block" flex="100">
-					<label>User Id</label> <input name=username ng-model="user.email"> </md-input-container>
+					<label>Email Id</label> <input ng-model="user.email"> </md-input-container>
 
 					<md-input-container class="md-block"> <label>Password</label>
-					<input type="password" name="password" ng-model="user.password"> </md-input-container>
-					<md-button type="submit" class="md-raised md-primary wdth100Per">Log
-					in</md-button>
-					<a class="redFont frgtPwd pull-right" href="/login/recover">Forgot
-						password?</a>
-					
+					<input type="password" ng-model="user.password"> </md-input-container>
+
+					<md-input-container class="md-block"> <label>Full
+						Name</label> <input type="text" ng-model="user.passwordConfirm"> </md-input-container>
+					<div layout-gt-xs="row">
+
+
+						<md-input-container class="md-block" flex-gt-sm>
+						<label>Gender</label> <md-select ng-model="user.state">
+						<md-option value="male"> Male </md-option> <md-option
+							value="female"> Female </md-option> </md-select> </md-input-container>
+
+						<md-input-container> <label>DOB</label> <md-datepicker
+							ng-model="user.submissionDate"></md-datepicker> </md-input-container>
+					</div>
+					<md-input-container class="md-block"> <md-checkbox
+						name="tos" ng-model="project.tos" required> I accept
+					the terms of service. </md-checkbox> <md-button type="submit"
+						class="md-raised md-primary wdth100Per">Sign Up</md-button> <!-- <md-input-container class="md-block"> <md-checkbox
+						name="rememberme" ng-model="rememberme" required>
+					Remember me </md-checkbox> </md-input-container> -->
 				</form>
 
-				<div class="sociallogin">
-					<h2 class="strikeThrough">
-						<span>Login with</span>
-					</h2>
-					<div><a href="/uaa/auth/facebook">
-						<span layout="row" layout-align="center center" flex="100">
-							<img flex-gt-sm="45" flex-xs="80" flex-sm="80"
-							src="images/icon/facebookLogin.png"
-							alt="enter image description here">
-						</span>
-						</a>
-						<!-- <span layout="row" layout-align="center center" flex="100">
-						<img flex="50" src="images/icon/googleLogin.png"
-							alt="enter image description here">
-							</span> -->
-					</div>
 
-
-				</div>
 			</div>
-			</md-content>  </md-card>
+			</md-content> </md-card>
 		</div>
 	</section>
 
-<footer>
-</footer>
+
 
 
 	<!-- Angular Material requires Angular.js Libraries -->
