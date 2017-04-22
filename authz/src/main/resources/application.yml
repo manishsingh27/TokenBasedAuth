@@ -1,7 +1,3 @@
-server:
-  port: 9999
-  contextPath: /uaa
-  
 security:
   user:
     password: none
@@ -9,18 +5,76 @@ security:
 logging:
   level:
     org:
+      
+      hibernate:  DEBUG
       springframework:
+        web:  DEBUG
         security: DEBUG
-        
+             
 facebook:
   appKey: 1896232807325142
   appSecret: 64096be669990079e7120465bc65de01
   
 token:
   secret: willremvoeit
-  
+
+---
+
 spring:
+  profiles: default
+  datasource:
+    url: jdbc:postgresql://localhost:5432/local-idp-xplusyz-db
+    username: idpuser
+    password: test123!
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
     showSql: true 
+  queries:
+    users-query: select username, password, enabled from users where username=?
+    roles-query: select u.email, r.role from users u inner join user_roles ur on(u.user_id=ur.user_id) inner join role r on(ur.role_id=r.role_id) where u.email=?
+
+server:
+  port: 9999
+  contextPath: /uaa
+
+---
+
+spring:
+  profiles: dev
+  datasource:
+    url: jdbc:postgresql://localhost:5432/local-idp-xplusyz-db
+    username: idpuser
+    password: test123!
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    showSql: true 
+  queries:
+    users-query: select email, password, enabled from users where email=?
+    roles-query: select u.email, r.role from users u inner join user_roles ur on(u.user_id=ur.user_id) inner join role r on(ur.role_id=r.role_id) where u.email=?
+
+server:
+  port: 9999
+  contextPath: /uaa
+     
+---
+
+spring:
+  profiles: heroku 
+  #datasource:
+    #url: ${JDBC_DATABASE_URL}
+    #username: ${JDBC_DATABASE_USERNAME}
+    #password: ${JDBC_DATABASE_PASSWORD}   
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    showSql: true 
+  queries:
+    users-query: select username, password, enabled from users where username=?
+    roles-query: select u.email, r.role from users u inner join user_roles ur on(u.user_id=ur.user_id) inner join role r on(ur.role_id=r.role_id) where u.email=?
+ 
+server:
+  port: ${PORT:9999}
+  contextPath: /uaa
+   

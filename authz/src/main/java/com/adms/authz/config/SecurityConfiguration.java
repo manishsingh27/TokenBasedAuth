@@ -1,6 +1,9 @@
 package com.adms.authz.config;
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -9,6 +12,8 @@ import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.preauth.AbstractPreAuthenticatedProcessingFilter;
 import org.springframework.social.UserIdSource;
 import org.springframework.social.security.SocialAuthenticationFilter;
@@ -21,6 +26,21 @@ import com.adms.authz.user.service.SocialUserService;
 @Configuration
 @Order(-20)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+	
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+	//@Autowired
+	//private UserDetailsService userDetailsService;
+	
+	@Autowired
+	private DataSource dataSource;
+	
+	@Value("${spring.queries.users-query}")
+	private String usersQuery;
+	
+	@Value("${spring.queries.roles-query}")
+	private String rolesQuery;
 	
 	@Autowired
 	private AuthenticationManager authenticationManager;
@@ -54,13 +74,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http
 			.formLogin().loginPage("/login").permitAll()
 		.and()
-			.requestMatchers().antMatchers("/login", "/oauth/authorize", "/oauth/confirm_access", "/auth/**", "/register")
+			.requestMatchers().antMatchers("/login", "/oauth/authorize", "/oauth/confirm_access", "/auth/**", "/v1/user", "/register")
 		.and()
 			.authorizeRequests()
-			.antMatchers("/register").permitAll()
+			.antMatchers("/register", "/v1/user").permitAll()
 			.anyRequest().authenticated().and()
+			.csrf().disable()
 			// add custom authentication filter for complete stateless JWT based authentication
-			.addFilterBefore(statelessAuthenticationFilter, AbstractPreAuthenticatedProcessingFilter.class)
+			//.addFilterBefore(statelessAuthenticationFilter, AbstractPreAuthenticatedProcessingFilter.class)
 
 			// apply the configuration from the socialConfigurer (adds the SocialAuthenticationFilter)
 			.apply(socialConfigurer.userIdSource(userIdSource));
@@ -75,8 +96,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		//auth.parentAuthenticationManager(authenticationManager);			
-		auth.inMemoryAuthentication()
+		//auth.parentAuthenticationManager(authenticationManager);	
+		/*auth.userDetailsService(userDetailsService)
+			.passwordEncoder(bCryptPasswordEncoder);*/
+		
+		auth.
+		jdbcAuthentication()
+			.usersByUsernameQuery(usersQuery)
+			.authoritiesByUsernameQuery(rolesQuery)
+			.dataSource(dataSource)
+			.passwordEncoder(bCryptPasswordEncoder);
+		
+		/*auth.inMemoryAuthentication()
 		.withUser("reader")
 		.password("reader")
 		.authorities("ROLE_READER")
@@ -87,12 +118,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.and()
 		.withUser("guest")
 		.password("guest")
-		.authorities("ROLE_GUEST");
+		.authorities("ROLE_GUEST");*/
 	}
 
 	/*@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.parentAuthenticationManager(authenticationManager);
 	}*/
+	
+
 
 }

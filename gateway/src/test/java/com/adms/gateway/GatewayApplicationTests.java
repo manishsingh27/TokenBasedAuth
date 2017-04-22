@@ -11,6 +11,7 @@ public class GatewayApplicationTests {
 
 	@Test
 	public void contextLoads() {
+		//
 	}
 
 }

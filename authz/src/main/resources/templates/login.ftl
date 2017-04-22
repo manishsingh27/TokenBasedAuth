@@ -3,7 +3,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Angular Material style sheet -->
 <link rel="stylesheet"
-	href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+	href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
 <link rel="stylesheet" href="css/app.css">
 </head>
 <body ng-app="app" ng-cloak>
@@ -34,7 +34,7 @@
 				layout-padding layout="row" layout-align="center">
 			<div flex="80">
 				<form name="userForm" action="login" method="post">
-				<input type="hidden" id="csrf_token" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+				
 					<md-input-container class="md-block" flex="100">
 					<label>User Id</label> <input name=username ng-model="user.email"> </md-input-container>
 
@@ -75,19 +75,20 @@
 </footer>
 
 
-	<!-- Angular Material requires Angular.js Libraries -->
+<script
+		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
 	<script
-		src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
 	<script
-		src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
 	<script
-		src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
-	<script
-		src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.min.js"></script>
 
 	<!-- Angular Material Library -->
 	<script
-		src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+		src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
 
 	<!-- Your application bootstrap  -->
 	<script type="text/javascript">
@@ -96,14 +97,14 @@
 		 */
 		/**angular.module('app', [ 'ngMaterial' ]); **/
 	</script>
-	<script src="js/app.js">
-		
-	</script>
+		<script type="text/javascript" src="js/app.js"> </script>
+		<script type="text/javascript" src="js/userController.js"> </script>
+		<script type="text/javascript" src="js/userService.js"> </script>	
 
 </body>
 </html>
 
 <!--
 Copyright 2016 Google Inc. All Rights Reserved. 
-Use of this source code is governed by an MIT-style license that can be in foundin the LICENSE file at http://material.angularjs.org/license.
+Use of this source code is governed by an MIT-style license that can be in foundin the LICENSE file at https://material.angularjs.org/license.
 -->

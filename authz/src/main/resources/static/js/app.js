@@ -1,7 +1,24 @@
-angular.module('app', [ 'ngMaterial' ]).config(
-		function($mdThemingProvider) {
+(function () {
+    'use strict';
 
-			$mdThemingProvider.definePalette('redTheme', {
+ angular.module('app', ['ngRoute', 'ngMaterial', 'ngMessages'])
+        .config(config);
+       
+config.$inject = ['$mdThemingProvider', '$routeProvider'];
+
+function config($mdThemingProvider, $routeProvider) {
+
+ 	$routeProvider
+            
+           /* .when('/register', {
+                controller: 'UserController',
+                templateUrl: 'templates/register.ftl',
+                controllerAs: 'vm'
+            })*/
+
+            .otherwise({ redirectTo: '/login' });
+
+	$mdThemingProvider.definePalette('redTheme', {
 				'50' : 'ffede9',
 				'100' : 'ffd1c8',
 				'200' : 'ffb3a4',
@@ -47,4 +64,6 @@ angular.module('app', [ 'ngMaterial' ]).config(
 
 			$mdThemingProvider.theme('toolbar').primaryPalette('toolbar').accentPalette('green');;
 
-		});
+		}
+		
+})();

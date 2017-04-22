@@ -3,10 +3,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Angular Material style sheet -->
 <link rel="stylesheet"
-	href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+	href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
 <link rel="stylesheet" href="css/app.css">
 </head>
 <body ng-app="app" ng-cloak>
+<div ng-controller="UserController as ctrl">
 	<header>
 		<md-toolbar class="md-hue-2 toolbarOuter" md-theme="toolbar">
 		<div class="md-toolbar-tools toolbarInner" layout="row"
@@ -33,57 +34,63 @@
 				class="loginWrapper" layout-padding layout="row"
 				layout-align="center">
 			<div flex="80" >
-				<form name="userForm" action="register" method="post">
-				<input type="hidden" id="csrf_token" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+				<form name="userForm" ng-submit="userForm.$valid && ctrl.createUser()"  method="post" role="form">
+								
 					<md-input-container class="md-block" flex="100">
-					<label>Email Id</label> <input ng-model="user.email"> </md-input-container>
+						<label>Email Id</label> 
+						<input ng-model="ctrl.user.email" type="email" name="email" value="" required> 
+						<div ng-messages="userForm.email.$error">
+							<div ng-message="required">You must enter a email id.</div>
+              				<div ng-message="email">Not valid email.</div>
+						</div>
+					</md-input-container>
 
-					<md-input-container class="md-block"> <label>Password</label>
-					<input type="password" ng-model="user.password"> </md-input-container>
+					<md-input-container class="md-block"> 
+						<label>Password</label>
+						<input name="password" type="password" ng-model="ctrl.user.password" ng-minlength="5" ng-maxlength="50" required> 
+						<div ng-messages="userForm.password.$error">
+							<div ng-message="required">You must enter a password.</div>
+							<div ng-message="minlength">Your field is too short.</div>
+              				<div ng-message="maxlength">Your field is too long.</div>
+						</div>
+					</md-input-container>
+					
+					<md-input-container class="md-block"> 
+					
+						<md-checkbox name="tou" ng-model="ctrl.user.isTOSAccepted" required>
+						  I accept the Terms of Use. 
+						</md-checkbox> 
+					
+					</md-input-container>
+					
+						<div ng-messages="userForm.tou.$error" ng-if="userForm.tou.$touched">
+							<div ng-message="required">Please Agree to Terms of Use</div>
+						</div>
+					
+					<md-button type="submit" ng-disabled="userForm.$invalid" class="md-raised md-primary wdth100Per">Sign Up</md-button>
 
-					<md-input-container class="md-block"> <label>Full
-						Name</label> <input type="text" ng-model="user.passwordConfirm"> </md-input-container>
-					<div layout-gt-xs="row">
-
-
-						<md-input-container class="md-block" flex-gt-sm>
-						<label>Gender</label> <md-select ng-model="user.state">
-						<md-option value="male"> Male </md-option> <md-option
-							value="female"> Female </md-option> </md-select> </md-input-container>
-
-						<md-input-container> <label>DOB</label> <md-datepicker
-							ng-model="user.submissionDate"></md-datepicker> </md-input-container>
-					</div>
-					<md-input-container class="md-block"> <md-checkbox
-						name="tos" ng-model="project.tos" required> I accept
-					the terms of service. </md-checkbox> <md-button type="submit"
-						class="md-raised md-primary wdth100Per">Sign Up</md-button> <!-- <md-input-container class="md-block"> <md-checkbox
-						name="rememberme" ng-model="rememberme" required>
-					Remember me </md-checkbox> </md-input-container> -->
 				</form>
-
-
 			</div>
 			</md-content> </md-card>
 		</div>
 	</section>
 
 
-
-
 	<!-- Angular Material requires Angular.js Libraries -->
 	<script
-		src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
 	<script
-		src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
 	<script
-		src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
 	<script
-		src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.min.js"></script>
 
 	<!-- Angular Material Library -->
 	<script
-		src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+		src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
 
 	<!-- Your application bootstrap  -->
 	<script type="text/javascript">
@@ -92,14 +99,9 @@
 		 */
 		/**angular.module('app', [ 'ngMaterial' ]); **/
 	</script>
-	<script src="js/app.js">
-		
-	</script>
-
+		<script type="text/javascript" src="js/app.js"> </script>
+		<script type="text/javascript" src="js/userController.js"> </script>
+		<script type="text/javascript" src="js/userService.js"> </script>		
+</div>
 </body>
 </html>
-
-<!--
-Copyright 2016 Google Inc. All Rights Reserved. 
-Use of this source code is governed by an MIT-style license that can be in foundin the LICENSE file at http://material.angularjs.org/license.
--->
