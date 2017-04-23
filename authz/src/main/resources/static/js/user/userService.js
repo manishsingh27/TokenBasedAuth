@@ -1,7 +1,7 @@
 (function () {
     'use strict';
     
-angular.module('app').factory('UserService', ['$http', '$q', function($http, $q){
+angular.module('app.user').factory('UserService', ['$http', '$q', function($http, $q){
 
     var REST_SERVICE_URI = '/uaa/v1/user';
 

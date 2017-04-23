@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.adms.authz.exception.FieldErrorDTO;
 import com.adms.authz.self.user.model.Users;
 
 import com.adms.authz.self.user.service.UsersService;
@@ -29,8 +30,8 @@ public class UsersController {
 	//-------------------Create a User--------------------------------------------------------
 	
 	@RequestMapping(value = "user", method=RequestMethod.POST)
-	public String createUser (@Valid @RequestBody Users user){	
-		String message="";
+	public FieldErrorDTO createUser (@Valid @RequestBody Users user){	
+		FieldErrorDTO message;
 		
 		try{
 		Users userExists = usersService.findUserByEmail(user.getEmail());
@@ -38,15 +39,18 @@ public class UsersController {
 		 
 		if (userExists != null) {
 			System.out.println("userExists User " + userExists.getName());
-			message="There is already a user registered with the email provided-:" +user.getEmail() ;
+			//message="There is already a user registered with the email provided-:" +user.getEmail() ;
+			message = new FieldErrorDTO("message", "There is already a user registered with the email provided-:" +user.getEmail());
 		}else{
 			System.out.print("Newuser");
-			message="User has been registered with the email provided-:" +user.getEmail() ;
+			//message="User has been registered with the email provided-:" +user.getEmail() ;
 			usersService.saveUser(user);
+			message = new FieldErrorDTO("message", "User has been successfully registered with the email provided-:" + user.getEmail());
 		}
 		} catch(Exception ex){
 			System.out.print("Error is-" + ex.getMessage());
-			message = "Error occured during registration";
+			//message = "Error occured during registration";
+			message = new FieldErrorDTO("message", "Error occured during registration with the email provided-:" +user.getEmail());
 		}
 					
 		return message;

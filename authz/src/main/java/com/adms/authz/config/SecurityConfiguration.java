@@ -70,14 +70,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 					}
 				});
 				
-		// @formatter:off
+		// @formatter:off 
 		http
 			.formLogin().loginPage("/login").permitAll()
 		.and()
-			.requestMatchers().antMatchers("/login", "/oauth/authorize", "/oauth/confirm_access", "/auth/**", "/v1/user", "/register")
+			.requestMatchers().antMatchers("/login", "/oauth/authorize", "/oauth/confirm_access", "/auth/**", "/v1/user", "/view/register.html", "/view/headers.html", 
+					"/view/login.html","/view/regHeaders.html")
 		.and()
 			.authorizeRequests()
-			.antMatchers("/register", "/v1/user").permitAll()
+			.antMatchers("/view/register.html", "/v1/user", "/view/headers.html", "/view/login.html", "/view/regHeaders.html").permitAll()
 			.anyRequest().authenticated().and()
 			.csrf().disable()
 			// add custom authentication filter for complete stateless JWT based authentication

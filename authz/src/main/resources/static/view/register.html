@@ -1,0 +1,55 @@
+
+	
+		<div layout="row" layout-align="center center">
+			
+			
+			<md-card flex-xs="90" flex-sm="70" flex-gt-sm="55"> <md-content
+				class="loginWrapper" layout-padding layout="row"
+				layout-align="center">			
+			
+			<div flex="80" >
+			
+			<md-input-container class="md-block" flex="100">
+				<div class="redFont"> {{vm.errorMsg}} </div>
+				<div class="redFont"> {{vm.successMsg}} </div>
+			</md-input-container>
+			
+				<form name="userForm" ng-submit="userForm.$valid && vm.createUser()"  method="post" role="form">
+								
+					<md-input-container class="md-block" flex="100">
+						<label>Email Id</label> 
+						<input ng-model="vm.user.email" type="email" name="email" value="" required> 
+						<div ng-messages="userForm.email.$error">
+							<div ng-message="required">You must enter a email id.</div>
+              				<div ng-message="email">Not a valid email.</div>
+						</div>
+					</md-input-container>
+
+					<md-input-container class="md-block"> 
+						<label>Password</label>
+						<input name="password" type="password" ng-model="vm.user.password" ng-minlength="5" ng-maxlength="50" required> 
+						<div ng-messages="userForm.password.$error">
+							<div ng-message="required">You must enter a password.</div>
+							<div ng-message="minlength">Your field is too short.</div>
+              				<div ng-message="maxlength">Your field is too long.</div>
+						</div>
+					</md-input-container>
+					
+					<md-input-container class="md-block"> 
+					
+						<md-checkbox name="tou" ng-model="vm.user.isTOSAccepted" required>
+						  I accept the Terms of Use. 
+						</md-checkbox> 
+					
+					</md-input-container>
+					
+						<div ng-messages="userForm.tou.$error" ng-if="userForm.tou.$touched">
+							<div ng-message="required">Please Agree to Terms of Use</div>
+						</div>
+					
+					<md-button type="submit" ng-disabled="userForm.$invalid" class="md-raised md-primary wdth100Per">Sign Up</md-button>
+
+				</form>
+			</div>
+			</md-content> </md-card>
+		</div>

@@ -28,7 +28,7 @@ spring:
     password: test123!
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: validate
     showSql: true 
   queries:
     users-query: select username, password, enabled from users where username=?
@@ -48,7 +48,7 @@ spring:
     password: test123!
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: validate
     showSql: true 
   queries:
     users-query: select email, password, enabled from users where email=?

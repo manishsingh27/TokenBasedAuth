@@ -1,16 +1,17 @@
 (function () {
     'use strict';
 
-angular.module('app').controller('UserController', ['$scope', '$location', 'UserService', function($scope, $location, UserService) {
-    var self = this;
-    self.user={email:'',password:''};
-    self.users=[];
+angular.module('app.user').controller('UserController', ['$scope', '$state', 'UserService', function($scope, $state, UserService) {
+    var vm = this;
+    vm.user={email:'',password:''};
+    vm.users=[];
 
-    self.submit = submit;
-    self.edit = edit;
-    self.remove = remove;
-    self.reset = reset;
-    self.createUser = createUser;
+    vm.submit = submit;
+    vm.edit = edit;
+    vm.remove = remove;
+    vm.reset = reset;
+    vm.createUser = createUser;
+    var registration = registration;
 
 
     //fetchAllUsers();
@@ -19,7 +20,7 @@ angular.module('app').controller('UserController', ['$scope', '$location', 'User
         UserService.fetchAllUsers()
             .then(
             function(d) {
-                self.users = d;
+                vm.users = d;
             },
             function(errResponse){
                 console.error('Error while fetching Users');
@@ -28,11 +29,12 @@ angular.module('app').controller('UserController', ['$scope', '$location', 'User
     }
 
     function createUser(){
-        UserService.createUser(self.user)
+        UserService.createUser(vm.user)
             .then(
                 userSuccess,
                 userFail
             );
+       // $state.go("loginPage");
     }
 
     function updateUser(user, id){
@@ -56,21 +58,21 @@ angular.module('app').controller('UserController', ['$scope', '$location', 'User
     }
 
     function submit() {
-        if(self.user.id===null){
-            console.log('Saving New User', self.user);
-            createUser(self.user);
+        if(vm.user.id===null){
+            console.log('Saving New User', vm.user);
+            createUser(vm.user);
         }else{
-            updateUser(self.user, self.user.id);
-            console.log('User updated with id ', self.user.id);
+            updateUser(vm.user, vm.user.id);
+            console.log('User updated with id ', vm.user.id);
         }
         reset();
     }
 
     function edit(id){
         console.log('id to be edited', id);
-        for(var i = 0; i < self.users.length; i++){
-            if(self.users[i].id === id) {
-                self.user = angular.copy(self.users[i]);
+        for(var i = 0; i < vm.users.length; i++){
+            if(vm.users[i].id === id) {
+                vm.user = angular.copy(vm.users[i]);
                 break;
             }
         }
@@ -78,7 +80,7 @@ angular.module('app').controller('UserController', ['$scope', '$location', 'User
 
     function remove(id){
         console.log('id to be deleted', id);
-        if(self.user.id === id) {//clean form if the user to be deleted is shown there.
+        if(vm.user.id === id) {//clean form if the user to be deleted is shown there.
             reset();
         }
         deleteUser(id);
@@ -86,21 +88,25 @@ angular.module('app').controller('UserController', ['$scope', '$location', 'User
 
 
     function reset(){
-        self.user={id:null,username:'',address:'',email:''};
+        vm.user={id:null,username:'',address:'',email:''};
         $scope.myForm.$setPristine(); //reset Form
     }
 
 var userSuccess = function(data) {
      //$scope.user = data;
-     console.info('User created successfully');
-      $location.path('/login');
+     vm.successMsg = data.message;
+     console.info('User created successfully-'+ data);
+     //$location.path('/login');
+    // $state.go("loginPage");
     };
 
 var userFail = function(reason) {
       //$scope.error = "Some error occured";
-      console.error('Error while fetching Users');
-      $location.path('/register');
+      vm.errorMsg = reason.message;
+      console.error('Error while fetching Users-'+reason);
+     // $location.path('/register');
     };
+    
 
 }])
 
