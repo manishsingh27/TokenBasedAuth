@@ -18,3 +18,15 @@ logging:
     org:
       springframework:
         security: DEBUG
+        web:  DEBUG
+---
+spring:
+    profiles: default
+    
+---
+spring:
+    profiles: dev
+    
+---
+spring:
+    profiles: heroku

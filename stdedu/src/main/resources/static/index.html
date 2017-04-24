@@ -1,0 +1,59 @@
+<html ng-app="app" ng-strict-di lang="en">
+	<head>
+	    <meta http-equiv="X-UA-Compatible" content="IE=11">
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+	    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	    <title>Students EDU Network</title>
+	    <!-- Angular Material style sheet -->
+	    <link rel="stylesheet"
+		    href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+	    <link rel="stylesheet" href="landingPage/css/app.css">  
+
+	</head>
+
+	<body ng-cloak>
+
+        <!-- Header Starts Here -->
+        <header ui-view="header"> </header>
+        <!-- Header Ends Here -->
+
+        <!-- Section Starts Here -->
+        <section ui-view="container"> </section>
+        <!-- Section Ends Here -->
+
+        <!-- Footer Starts Here  -->
+        <!-- <footer ui-view="footer"> </footer> -->
+        <!-- Footer Ends Here  -->            
+
+
+        <!-- Angular Material requires Angular.js Libraries -->
+        <script
+            src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+        <script
+            src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+        <script
+            src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+        <script
+            src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+        <script 
+            src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.min.js"></script>            
+         <script
+            src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+		
+		<script type="text/javascript" 
+            src="landingPage/js/user/user.module.js"> </script> 
+        <script type="text/javascript" 
+            src="landingPage/js/app.js"> </script>
+        <script type="text/javascript" 
+            src="landingPage/js/app.routes.js"> </script>
+         
+        <script type="text/javascript" 
+            src="landingPage/js/user/config.route.js"> </script>
+        <script type="text/javascript" 
+            src="landingPage/js/user/userController.js"> </script>
+        <script type="text/javascript" 
+            src="landingPage/js/user/userService.js"> </script>		        
+
+    </body>
+</html>

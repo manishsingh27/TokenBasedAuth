@@ -9,7 +9,9 @@ spring:
 
 logging:
   level:
-    org.springframework.security: DEBUG
+    org.springframework:
+      security: DEBUG
+      web:  DEBUG
 ---
 
 spring:
@@ -23,6 +25,9 @@ security:
       userAuthorizationUri: http://localhost:9999/uaa/oauth/authorize
       clientId: acme
       clientSecret: acmesecret
+      #registered-redirect-uri: http://localhost:8080/landingPage
+      #pre-established-redirect-uri: http://localhost:8080/landingPage
+      #use-current-uri: false
     resource:
       jwt:
         keyValue: |
@@ -36,11 +41,14 @@ zuul:
       path: /idpapi/v1/**
       url: http://localhost:9000/idpapi/v1/
     user:
-      path: /user/**
-      url: http://localhost:9999/uaa/user
-    eduui:
-      path: /eduui/**
-      url: http://localhost:8081    
+      path: /uaa/v1/api/user/**
+      url: http://localhost:9999/uaa/v1/api/user/
+    edunet:
+      path: /landingPage/**
+      url: http://localhost:9001/edunet/  
+    edunetapi:
+      path: /edunet/v1/**
+      url: http://localhost:9001/edunet/v1/  
     adminui:
       path: /adminui/**
       url: http://localhost:8082
@@ -57,6 +65,9 @@ security:
       userAuthorizationUri: http://localhost:9999/uaa/oauth/authorize
       clientId: acme
       clientSecret: acmesecret
+      #registered-redirect-uri: http://localhost:8080/landingPage
+      #pre-established-redirect-uri: http://localhost:8080/landingPage
+      #use-current-uri: false        
     resource:
       jwt:
         keyValue: |
@@ -68,13 +79,16 @@ zuul:
   routes:
     idpapi:
       path: /idpapi/v1/**
-      url: http://localhost:9000/idpapi/v1/
+      url: http://localhost:9000/idpapi/v1/     
     user:
-      path: /user/**
-      url: http://localhost:9999/uaa/user
-    eduui:
-      path: /eduui/**
-      url: http://localhost:8081    
+      path: /uaa/v1/api/user/**
+      url: http://localhost:9999/uaa/v1/api/user/   
+    edunet:
+      path: /landingPage/**
+      url: http://localhost:9001/edunet/
+    edunetapi:
+      path: /edunet/v1/**
+      url: http://localhost:9001/edunet/v1/    
     adminui:
       path: /adminui/**
       url: http://localhost:8082
@@ -92,6 +106,9 @@ security:
       userAuthorizationUri: https://dev-xplusyz.herokuapp.com/uaa/oauth/authorize
       clientId: acme
       clientSecret: acmesecret
+      #registered-redirect-uri: https://dev-xplusyz.azurewebsites.net/landingPage
+      #pre-established-redirect-uri: https://dev-xplusyz.azurewebsites.net/landingPage
+      #use-current-uri: false
     resource:
       jwt:
         keyValue: |
@@ -103,13 +120,16 @@ zuul:
   routes:
     idpapi:
       path: /idpapi/v1/**
-      url: http://localhost:9000/idpapi/v1/
+      url: https://authzapi.azurewebsites.net/idpapi/v1/
     user:
-      path: /user/**
-      url: https://dev-xplusyz.herokuapp.com/uaa/user
-    eduui:
-      path: /eduui/**
-      url: http://localhost:8081    
+      path: /uaa/v1/api/user/**
+      url: http://localhost:9999/uaa/v1/api/user/          
+    edunet:
+      path: /landingPage/**
+      url: https://dev-xplusyx-edunet.azurewebsites.net/edunet/
+    edunetapi:
+      path: /edunet/v1/**
+      url: https://dev-xplusyx-edunet.azurewebsites.net/edunet/v1/    
     adminui:
       path: /adminui/**
       url: http://localhost:8082

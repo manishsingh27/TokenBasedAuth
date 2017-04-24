@@ -38,11 +38,11 @@ public class AuthorizationConfiguration extends AuthorizationServerConfigurerAda
 				.withClient("acme")
 				.secret("acmesecret")
 				.autoApprove(true)
-				.accessTokenValiditySeconds(600)
+				.accessTokenValiditySeconds(1800)
 				.refreshTokenValiditySeconds(1800)
 				.authorizedGrantTypes("authorization_code", "refresh_token",
 						"password").scopes("openid")
-				.redirectUris("https://dev-xplusyz.azurewebsites.net/login", 
+				.redirectUris("https://dev-xplusyz.azurewebsites.net/login",
 							   "http://localhost:8080/login");
 	}
 

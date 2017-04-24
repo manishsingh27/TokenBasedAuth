@@ -1,0 +1,86 @@
+
+	
+		<div layout="row" layout-align="center center">
+			
+			
+			<md-card flex-xs="90" flex-sm="70" flex-gt-sm="55"> <md-content
+				class="loginWrapper" layout-padding layout="row"
+				layout-align="center">			
+			
+			<div flex="80" >
+			
+			<md-input-container class="md-block" flex="100">
+				<div class="redFont"> {{vm.errorMsg}} </div>
+				<div class="redFont"> {{vm.successMsg}} </div>
+			</md-input-container>
+			
+				<form name="userForm" ng-submit="vm.updateUser()"  method="put" role="form">
+								
+					<md-input-container class="md-block" flex="100">
+						<label>Email Id</label> 
+						<input ng-model="vm.user.email" type="email" name="email" required readonly> 
+						<div ng-messages="userForm.email.$error">
+							<div ng-message="required">You must enter a email id.</div>
+              				<div ng-message="email">Not a valid email.</div>
+						</div>
+					</md-input-container>
+
+					<md-input-container class="md-block" flex="100">
+						<label>First Name</label> 
+						<input ng-model="vm.user.name" type="text" name="name"> 						
+					</md-input-container>
+
+					<md-input-container class="md-block" flex="100">
+						<label>Last Name</label> 
+						<input ng-model="vm.user.lastName" type="text" name="lastName"> 						
+					</md-input-container>
+					
+					<div layout-gt-xs="row">
+
+					<md-input-container class="md-block" flex-gt-sm>
+						<label>Gender</label> 
+						<md-select ng-model="vm.user.gender">
+							<md-option value="male"> Male </md-option> 
+							<md-option value="female"> Female </md-option> 
+						</md-select> 
+					</md-input-container>
+
+					<md-input-container> 
+						<label>DOB</label> 
+						<md-datepicker ng-model="vm.user.dob">
+						</md-datepicker> 
+					</md-input-container>
+					
+					</div>
+
+					<md-input-container class="md-block" flex="100">
+						<label>Current Grade</label> 
+						<input ng-model="vm.user.grade" type="text" name="grade"> 						
+					</md-input-container>
+
+					<md-input-container class="md-block" flex="100">
+						<label>Mobile Number</label> 
+						<input ng-model="vm.user.mobileNumber" type="text" name="mobileNumber"> 						
+					</md-input-container>
+
+					<md-input-container class="md-block" flex="100">
+						<label>City</label> 
+						<input ng-model="vm.user.city" type="text" name="city"> 						
+					</md-input-container>
+
+					<md-input-container class="md-block" flex="100">
+						<label>State</label> 
+						<input ng-model="vm.user.state" type="text" name="state"> 						
+					</md-input-container>
+
+					<md-input-container class="md-block" flex="100">
+						<label>Country</label> 
+						<input ng-model="vm.user.country" type="text" name="country"> 						
+					</md-input-container>
+					
+					<md-button type="submit" class="md-raised md-primary wdth100Per">Update</md-button>
+
+				</form>
+			</div>
+			</md-content> </md-card>
+		</div>

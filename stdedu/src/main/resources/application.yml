@@ -1,0 +1,49 @@
+server:
+  port: 9001
+  contextPath: /edunet
+ 
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+spring:
+  profiles: default        
+security:
+  sessions: stateless
+  user.password: none
+  oauth2:
+    resource:
+      jwt:
+        keyValue: |
+          -----BEGIN PUBLIC KEY-----
+          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhweFk60zYAkAEzvFeoNPswrADUx2VWADMDqo5oLH7oX5PRo1UBlYOSMISWIpRhYPNd2Drsf3rqRlNUjiT/SZhLj9jXI+2C62QsHX3B7XDQwlRfOOR9ldxZvbrM8//sfEHH25188/d15vlwFy466EmI7Iz3ELRSxRNbGvg2R/0RrPmTsavails/6RRiKSlrPIDbCrxEEJLrZi/zPDF4JL3n/Zm6iB2SeOB82/an0HVW+ElExT+gqINlLYjQtx24esQFct0J4rgRh7u0zUo12bUYToyMYrQxotmD9JQuT029nH4ADJhGgVDsxOZDFHVaO0xdJjjmMmOJ1Re/ghO6P8+QIDAQAB
+          -----END PUBLIC KEY-----
+---
+         
+spring:
+  profiles: dev        
+security:
+  sessions: stateless
+  user.password: none
+  oauth2:
+    resource:
+      jwt:
+        keyValue: |
+          -----BEGIN PUBLIC KEY-----
+          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhweFk60zYAkAEzvFeoNPswrADUx2VWADMDqo5oLH7oX5PRo1UBlYOSMISWIpRhYPNd2Drsf3rqRlNUjiT/SZhLj9jXI+2C62QsHX3B7XDQwlRfOOR9ldxZvbrM8//sfEHH25188/d15vlwFy466EmI7Iz3ELRSxRNbGvg2R/0RrPmTsavails/6RRiKSlrPIDbCrxEEJLrZi/zPDF4JL3n/Zm6iB2SeOB82/an0HVW+ElExT+gqINlLYjQtx24esQFct0J4rgRh7u0zUo12bUYToyMYrQxotmD9JQuT029nH4ADJhGgVDsxOZDFHVaO0xdJjjmMmOJ1Re/ghO6P8+QIDAQAB
+          -----END PUBLIC KEY-----
+---
+         
+spring:
+  profiles: heroku        
+security:
+  sessions: stateless
+  user.password: none
+  oauth2:
+    resource:
+      jwt:
+        keyValue: |
+          -----BEGIN PUBLIC KEY-----
+          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhweFk60zYAkAEzvFeoNPswrADUx2VWADMDqo5oLH7oX5PRo1UBlYOSMISWIpRhYPNd2Drsf3rqRlNUjiT/SZhLj9jXI+2C62QsHX3B7XDQwlRfOOR9ldxZvbrM8//sfEHH25188/d15vlwFy466EmI7Iz3ELRSxRNbGvg2R/0RrPmTsavails/6RRiKSlrPIDbCrxEEJLrZi/zPDF4JL3n/Zm6iB2SeOB82/an0HVW+ElExT+gqINlLYjQtx24esQFct0J4rgRh7u0zUo12bUYToyMYrQxotmD9JQuT029nH4ADJhGgVDsxOZDFHVaO0xdJjjmMmOJ1Re/ghO6P8+QIDAQAB
+          -----END PUBLIC KEY-----

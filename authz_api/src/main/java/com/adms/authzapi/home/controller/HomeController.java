@@ -13,7 +13,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "user", method=RequestMethod.GET)
 	public String create (Principal user, @RequestHeader("Authorization") String authTokens){	
-		return "Test:-" + (String) user.getName() + "-" + authTokens;
+		return "{userId:" + (String) user.getName()+ "}";
 	}
 
 }

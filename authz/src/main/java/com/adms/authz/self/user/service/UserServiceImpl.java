@@ -56,7 +56,8 @@ public class UserServiceImpl implements UsersService {
 	}
 
 	public Users updateUser(Users user) {
-		return null;
+		
+		return usersRepository.save(user);
 		// int index = users.indexOf(user);
 		// users.set(index, user);
 	}

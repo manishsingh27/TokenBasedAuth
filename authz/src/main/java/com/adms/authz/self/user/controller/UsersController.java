@@ -2,6 +2,7 @@ package com.adms.authz.self.user.controller;
 
 
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -9,6 +10,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -56,6 +58,27 @@ public class UsersController {
 		return message;
 	}
 	
+	//------------------- Update a User --------------------------------------------------------
+	
+		@RequestMapping (value="user/{eMailId}", method = RequestMethod.PUT)
+		public Users updateUser (@PathVariable String eMailId, @RequestBody Users user){
+			
+			Users currentUser = usersService.findUserByEmail(eMailId);
+			
+			currentUser.setName(user.getName());        
+	        currentUser.setLastName(user.getLastName());
+	        currentUser.setDob(user.getDob());
+	        currentUser.setGrade(user.getGrade());
+	        currentUser.setGender(user.getGender());
+	        currentUser.setMobileNumber(user.getMobileNumber());
+	        currentUser.setCity(user.getCity());
+	        currentUser.setState(user.getState());
+	        currentUser.setCountry(user.getCountry());
+	        
+			return usersService.updateUser(user);
+					
+		}
+	
 	
 	//-------------------Retrieve All Users--------------------------------------------------------
 	
@@ -63,28 +86,15 @@ public class UsersController {
 	public List<Users> listAllUsers(){
 		return usersService.findAllUsers();
 	}
-	
+					
 	
 	//-------------------Retrieve Single User--------------------------------------------------------
 	
-	@RequestMapping(value = "user/{eMailId:.+}", method = RequestMethod.GET)
+	@RequestMapping(value = "api/user/{eMailId:.+}", method = RequestMethod.GET)
 	public Users getUser(@PathVariable String eMailId){	
 		return usersService.findUserByEmail(eMailId);
 	}
 	
-	
-	//------------------- Update a User --------------------------------------------------------
-	
-	@RequestMapping (value="user/{eMailId}", method = RequestMethod.PUT)
-	public Users updateUser (@PathVariable String eMailId, @RequestBody Users user){
-		
-		Users currentUser = usersService.findUserByEmail(eMailId);
-		
-		currentUser.setName(user.getName());        
-        currentUser.setEmail(user.getEmail());
-        
-		return usersService.updateUser(user);
-	}
 	
 	
 	//------------------- Delete a User --------------------------------------------------------
