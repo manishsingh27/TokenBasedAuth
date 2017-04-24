@@ -1,14 +1,13 @@
-server:
-  port: 9001
-  contextPath: /edunet
- 
 logging:
   level:
     org:
       springframework:
         security: DEBUG
 spring:
-  profiles: default        
+  profiles: default
+server:
+  port: 9001
+  contextPath: /edunet        
 security:
   sessions: stateless
   user.password: none
@@ -22,7 +21,10 @@ security:
 ---
          
 spring:
-  profiles: dev        
+  profiles: dev
+server:
+  port: 9001
+  contextPath: /edunet        
 security:
   sessions: stateless
   user.password: none
@@ -36,7 +38,10 @@ security:
 ---
          
 spring:
-  profiles: heroku        
+  profiles: heroku
+server:
+  #port: 9001
+  contextPath: /edunet         
 security:
   sessions: stateless
   user.password: none

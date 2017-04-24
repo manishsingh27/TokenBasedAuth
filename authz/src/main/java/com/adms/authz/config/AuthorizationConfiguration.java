@@ -42,7 +42,7 @@ public class AuthorizationConfiguration extends AuthorizationServerConfigurerAda
 				.refreshTokenValiditySeconds(1800)
 				.authorizedGrantTypes("authorization_code", "refresh_token",
 						"password").scopes("openid")
-				.redirectUris("https://dev-xplusyz.azurewebsites.net/login",
+				.redirectUris("https://dev-xplusyz.azurewebsites.net/login","http://dev-xplusyz.azurewebsites.net/login",
 							   "http://localhost:8080/login");
 	}
 

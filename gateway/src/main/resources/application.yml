@@ -1,7 +1,4 @@
 debug: true
-
-server:
- port: 8080
  
 spring:
   aop:
@@ -13,9 +10,11 @@ logging:
       security: DEBUG
       web:  DEBUG
 ---
-
+ 
 spring:
     profiles: default
+server:
+ port: 8080
 security:
   user:
     password: none
@@ -37,9 +36,9 @@ security:
 
 zuul:
   routes:
-    idpapi:
-      path: /idpapi/v1/**
-      url: http://localhost:9000/idpapi/v1/
+    #idpapi:
+      #path: /idpapi/v1/**
+      #url: http://localhost:9000/idpapi/v1/
     user:
       path: /uaa/v1/api/user/**
       url: http://localhost:9999/uaa/v1/api/user/
@@ -49,13 +48,15 @@ zuul:
     edunetapi:
       path: /edunet/v1/**
       url: http://localhost:9001/edunet/v1/  
-    adminui:
-      path: /adminui/**
-      url: http://localhost:8082
+    #adminui:
+      #path: /adminui/**
+      #url: http://localhost:8082
 ---
-
+ 
 spring:
     profiles: dev
+server:
+ port: 8080
 security:
   user:
     password: none
@@ -77,9 +78,9 @@ security:
 
 zuul:
   routes:
-    idpapi:
-      path: /idpapi/v1/**
-      url: http://localhost:9000/idpapi/v1/     
+    #idpapi:
+      #path: /idpapi/v1/**
+      #url: http://localhost:9000/idpapi/v1/     
     user:
       path: /uaa/v1/api/user/**
       url: http://localhost:9999/uaa/v1/api/user/   
@@ -89,9 +90,9 @@ zuul:
     edunetapi:
       path: /edunet/v1/**
       url: http://localhost:9001/edunet/v1/    
-    adminui:
-      path: /adminui/**
-      url: http://localhost:8082
+    #adminui:
+      #path: /adminui/**
+      #url: http://localhost:8082
           
 ---
 
@@ -118,19 +119,19 @@ security:
 
 zuul:
   routes:
-    idpapi:
-      path: /idpapi/v1/**
-      url: https://authzapi.azurewebsites.net/idpapi/v1/
+    #idpapi:
+      #path: /idpapi/v1/**
+      #url: https://authzapi.azurewebsites.net/idpapi/v1/
     user:
       path: /uaa/v1/api/user/**
-      url: http://localhost:9999/uaa/v1/api/user/          
+      url: https://dev-xplusyz.herokuapp.com/uaa/v1/api/user/          
     edunet:
       path: /landingPage/**
       url: https://dev-xplusyx-edunet.azurewebsites.net/edunet/
     edunetapi:
       path: /edunet/v1/**
       url: https://dev-xplusyx-edunet.azurewebsites.net/edunet/v1/    
-    adminui:
-      path: /adminui/**
-      url: http://localhost:8082
+    #adminui:
+      #path: /adminui/**
+      #url: http://localhost:8082
 

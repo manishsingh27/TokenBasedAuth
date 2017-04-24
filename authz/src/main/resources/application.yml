@@ -31,7 +31,7 @@ spring:
       ddl-auto: validate
     showSql: true 
   queries:
-    users-query: select username, password, enabled from users where username=?
+    users-query: select email, password, enabled from users where email=?
     roles-query: select u.email, r.role from users u inner join user_roles ur on(u.user_id=ur.user_id) inner join role r on(ur.role_id=r.role_id) where u.email=?
 
 server:
@@ -68,12 +68,11 @@ spring:
     #password: ${JDBC_DATABASE_PASSWORD}   
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: validate
     showSql: true 
   queries:
-    users-query: select username, password, enabled from users where username=?
+    users-query: select email, password, enabled from users where email=?
     roles-query: select u.email, r.role from users u inner join user_roles ur on(u.user_id=ur.user_id) inner join role r on(ur.role_id=r.role_id) where u.email=?
- 
 server:
   port: ${PORT:9999}
   contextPath: /uaa
