@@ -6,6 +6,8 @@ package com.adms.authz.exception;
  */
 public class FieldErrorDTO {
 	private String field;
+	
+	private int errorCode;
 
 	private String message;
 
@@ -13,6 +15,17 @@ public class FieldErrorDTO {
 		this.field = field;
 		this.message = message;
 	}
+	
+	
+
+	public FieldErrorDTO(String field, int errorCode, String message) {
+		super();
+		this.field = field;
+		this.errorCode = errorCode;
+		this.message = message;
+	}
+
+
 
 	public String getField() {
 		return field;
@@ -21,5 +34,12 @@ public class FieldErrorDTO {
 	public String getMessage() {
 		return message;
 	}
+
+	public int getErrorCode() {
+		return errorCode;
+	}
+
+	
+	
 
 }

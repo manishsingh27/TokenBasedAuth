@@ -7,12 +7,14 @@ public class ValidationErrorDTO {
 
 	private List<FieldErrorDTO> fieldErrors = new ArrayList<>();
 
-	public ValidationErrorDTO() {
 
+	public void addFieldError(String field, String message) {
+		FieldErrorDTO error = new FieldErrorDTO(field, message);
+		fieldErrors.add(error);
 	}
-
-	public void addFieldError(String path, String message) {
-		FieldErrorDTO error = new FieldErrorDTO(path, message);
+	
+	public void addFieldError(String field, int errorCode, String message) {
+		FieldErrorDTO error = new FieldErrorDTO(field, errorCode, message);
 		fieldErrors.add(error);
 	}
 

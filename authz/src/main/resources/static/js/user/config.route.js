@@ -9,16 +9,25 @@
 
                 url: '/loginPage',
                 
+                /*resolve : { @ngInject 
+                	responseData : [ '$stateParams',function($stateParams) {
+        				console.info($stateParams.success);
+        				
+        			} ]
+                },*/
+                
                 views: {
                         header: {
 					        templateUrl : 'view/headers.html',	
-                            controller: "UserController as vm"				
+                            //controller: "UserController as vm"				
                 	    },
                 
                         container: {
                             templateUrl: 'view/login.html',
+                            params: {'success': null},
                             controller: "UserController as vm"
-                    },
+                           
+                    }
 
                 }
             })
@@ -36,7 +45,7 @@
                         container: {
                             templateUrl: 'view/register.html',
                             controller: "UserController as vm"
-                    },
+                    }
 
                 }
             })

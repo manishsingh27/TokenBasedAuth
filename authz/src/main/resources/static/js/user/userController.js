@@ -1,10 +1,13 @@
 (function () {
     'use strict';
 
-angular.module('app.user').controller('UserController', ['$scope', '$state', 'UserService', function($scope, $state, UserService) {
+angular.module('app.user').controller('UserController', ['$scope', '$state', 'UserService', '$stateParams', 
+	function($scope, $state, UserService, $stateParams) {
     var vm = this;
     vm.user={email:'',password:''};
     vm.users=[];
+    vm.successMsg= $stateParams.success;
+    console.info($stateParams.success);
 
     vm.submit = submit;
     vm.edit = edit;
@@ -94,8 +97,23 @@ angular.module('app.user').controller('UserController', ['$scope', '$state', 'Us
 
 var userSuccess = function(data) {
      //$scope.user = data;
-     vm.successMsg = data.message;
-     console.info('User created successfully-'+ data);
+     
+     if(!data.hasError){
+         console.info('User created successfully-'+ data);
+         vm.successMsg = data.payload;
+         $state.go("loginPage", {success:data.payload}, { reload: true });
+     }else if(data.hasError){
+
+         console.info('Error Occured-'+ data);
+         vm.errorMsg = data.error.fieldErrors[0].message;
+         vm.user.email='';
+         vm.user.password='';
+         vm.user.isTOSAccepted='false';
+     }else{
+         console.info('Validation error'+ data);
+         vm.errorMsg = data.fieldErrors[0].message;
+     }
+     
      //$location.path('/login');
     // $state.go("loginPage");
     };
