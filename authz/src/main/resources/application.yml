@@ -17,7 +17,11 @@ facebook:
   
 token:
   secret: willremvoeit
-
+  
+support:
+  email: xplusyz@yahoo.com
+  from: noreply_xplusyz@xplusyz.com
+  
 ---
 
 spring:
@@ -33,10 +37,36 @@ spring:
   queries:
     users-query: select email, password, enabled from users where email=?
     roles-query: select u.email, r.role from users u inner join user_roles ur on(u.user_id=ur.user_id) inner join role r on(ur.role_id=r.role_id) where u.email=?
+    
+  mail:
+    host: smtp.sendgrid.net
+    port: 465
+    protocol: smtps
+    username: azure_82d63a8199cb145e13ffd8dffcf3b801@azure.com
+    password: test123!
+    properties:
+      mail:
+        transport:
+          protocol: smtps
+      properties:
+        mail:
+          smtps:
+            ssl:
+              enable: true  
+            auth: true  
+            #starttls:
+              #enable: true
+            timeout: 2000
 
 server:
   port: 9999
   contextPath: /uaa
+  
+base:
+  protocol: http://
+  host: localhost:8080
+  #port: 8080
+
 
 ---
 
@@ -53,11 +83,36 @@ spring:
   queries:
     users-query: select email, password, enabled from users where email=?
     roles-query: select u.email, r.role from users u inner join user_roles ur on(u.user_id=ur.user_id) inner join role r on(ur.role_id=r.role_id) where u.email=?
+    
+  mail:
+    host: smtp.sendgrid.net
+    port: 465
+    protocol: smtps
+    username: azure_82d63a8199cb145e13ffd8dffcf3b801@azure.com
+    password: test123!
+    properties:
+      mail:
+        transport:
+          protocol: smtps
+      properties:
+        mail:
+          smtps:
+            ssl:
+              enable: true
+            auth: true  
+            #starttls:
+              #enable: true
+            timeout: 2000 
 
 server:
   port: 9999
   contextPath: /uaa
-     
+
+base:
+  protocol: http://
+  host: localhost:8080
+  #port: 8080
+    
 ---
 
 spring:
@@ -68,12 +123,35 @@ spring:
     #password: ${JDBC_DATABASE_PASSWORD}   
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: create
     showSql: true 
   queries:
     users-query: select email, password, enabled from users where email=?
     roles-query: select u.email, r.role from users u inner join user_roles ur on(u.user_id=ur.user_id) inner join role r on(ur.role_id=r.role_id) where u.email=?
+
+  mail:
+    host: email-smtp.us-east-1.amazonaws.com
+    port: 2525
+    protocol: smtps
+    username: AKIAJIKXZAQFFJDXI4VQ
+    password: 
+    properties:
+      mail:
+        transport:
+          protocol: smtps
+      properties:
+        mail:
+          smtps:
+            auth: true  
+            starttls:
+              enable: true
+            timeout: 2000
+            
 server:
   port: ${PORT:9999}
   contextPath: /uaa
-   
+
+base:
+  protocol: https://
+  host: dev-xplusyz.azurewebsites.net
+  #port:  

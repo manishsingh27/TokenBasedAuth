@@ -42,6 +42,9 @@ zuul:
     user:
       path: /uaa/v1/api/user/**
       url: http://localhost:9999/uaa/v1/api/user/
+    regsiter:
+      path: /uaa/v1/api/user/registrationConfirm**
+      url: http://localhost:9999/uaa/v1/api/user/registrationConfirm
     edunet:
       path: /landingPage/**
       url: http://localhost:9001/edunet/  

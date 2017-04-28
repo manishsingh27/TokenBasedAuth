@@ -2,6 +2,7 @@ package com.adms.authz.self.user.service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -20,8 +21,10 @@ import org.springframework.stereotype.Service;
 
 import com.adms.authz.self.user.model.Role;
 import com.adms.authz.self.user.model.Users;
+import com.adms.authz.self.user.model.VerificationToken;
 import com.adms.authz.self.user.repository.RoleRepository;
 import com.adms.authz.self.user.repository.UsersRepository;
+import com.adms.authz.self.user.repository.VerificationTokenRepository;
 
 @Service("usersService")
 public class UserServiceImpl implements UsersService {
@@ -31,7 +34,13 @@ public class UserServiceImpl implements UsersService {
 	@Autowired
 	private RoleRepository roleRepository;
 	@Autowired
+	private VerificationTokenRepository tokenRepository;
+	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+    public static final String TOKEN_INVALID = "invalidToken";
+    public static final String TOKEN_EXPIRED = "expired";
+    public static final String TOKEN_VALID = "valid";
 
 	@Override
 	public Users findUserByEmail(String email) {
@@ -39,24 +48,70 @@ public class UserServiceImpl implements UsersService {
 	}
 
 	@Override
-	public void saveUser(Users user) {
+	public Users saveUser(Users user) {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-		user.setActive(true);
-		Role userRole = roleRepository.findByRole("ROLE_READER");
-		user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
-		usersRepository.save(user);
+		user.setActive(false);
+		
+		Role userReaderRole = roleRepository.findByRole("ROLE_READER");
+		Role userWriterRole = roleRepository.findByRole("ROLE_WRITER");
+		
+		//Role userRole = roleRepository.findByRole("ROLE_READER");
+		List <Role> roleList = new ArrayList<Role>();
+		roleList.addAll(Arrays.asList(userReaderRole));
+		roleList.addAll(Arrays.asList(userWriterRole));
+		user.setRoles(new HashSet<Role>(roleList));
+		
+		//userRole = roleRepository.findByRole("ROLE_WRITER");
+		//user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
+		
+		return usersRepository.save(user);
 	}
 
 	@Override
+	public void createVerificationTokenForUser(final Users user, final String token) {
+		final VerificationToken myToken = new VerificationToken(token, user);
+		tokenRepository.save(myToken);
+	}
+	
+	@Override
+	public String validateVerificationToken(String token) {
+		final VerificationToken verificationToken = tokenRepository.findByToken(token);
+		if (verificationToken == null) {
+			return TOKEN_INVALID;
+		}
 
+		final Users user = verificationToken.getUser();
+		final Calendar cal = Calendar.getInstance();
+		if ((verificationToken.getExpiryDate().getTime() - cal.getTime().getTime()) <= 0) {
+			tokenRepository.delete(verificationToken);
+			return TOKEN_EXPIRED;
+		}
+
+		user.setActive(true);
+		// tokenRepository.delete(verificationToken);
+		usersRepository.save(user);
+		return TOKEN_VALID;
+	}
+	
+	@Override
+	public Users getUser(final String verificationToken) {
+		final VerificationToken token = tokenRepository.findByToken(verificationToken);
+		if (token != null) {
+			return token.getUser();
+		}
+		return null;
+	}
+
+	@Override
 	public List<Users> findAllUsers() {
 
 		return populateDummyUsers();
 		// return usersRepository.findAllUsers();
 	}
 
+	@Override
 	public Users updateUser(Users user) {
-		
+
 		return usersRepository.save(user);
 		// int index = users.indexOf(user);
 		// users.set(index, user);

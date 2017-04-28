@@ -14,13 +14,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	public void configure(HttpSecurity http) throws Exception {
 		// @formatter:off
 		http
-			.logout().and()
+			.logout().logoutSuccessUrl("/index.html").and()
 			.authorizeRequests()
-				.antMatchers("/index.html", "/home.html", "/", "/login").permitAll()
+				.antMatchers("/index.html", "/home.html", "/", "/login", "/uaa/v1/api/user/registrationConfirm").permitAll()
 				.anyRequest().authenticated()
 				.and()
 			.csrf()
 				.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
+				
 			// @formatter:on
 	}
 
