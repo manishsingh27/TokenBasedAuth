@@ -32,7 +32,7 @@ spring:
     password: test123!
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: create
     showSql: true 
   queries:
     users-query: select email, password, enabled from users where email=?
@@ -78,7 +78,7 @@ spring:
     password: test123!
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: create
     showSql: true 
   queries:
     users-query: select email, password, enabled from users where email=?

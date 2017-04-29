@@ -30,8 +30,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-	//@Autowired
-	//private UserDetailsService userDetailsService;
+	@Autowired
+	private UserDetailsService userDetailsService;
 	
 	@Autowired
 	private DataSource dataSource;
@@ -98,15 +98,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		//auth.parentAuthenticationManager(authenticationManager);	
-		/*auth.userDetailsService(userDetailsService)
-			.passwordEncoder(bCryptPasswordEncoder);*/
+		auth.userDetailsService(userDetailsService)
+			.passwordEncoder(bCryptPasswordEncoder);
 		
-		auth.
+		/*auth.
 		jdbcAuthentication()
 			.usersByUsernameQuery(usersQuery)
 			.authoritiesByUsernameQuery(rolesQuery)
 			.dataSource(dataSource)
-			.passwordEncoder(bCryptPasswordEncoder);
+			.passwordEncoder(bCryptPasswordEncoder);*/
 		
 		/*auth.inMemoryAuthentication()
 		.withUser("reader")

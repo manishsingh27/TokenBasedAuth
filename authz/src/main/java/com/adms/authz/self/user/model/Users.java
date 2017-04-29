@@ -27,54 +27,55 @@ public class Users {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "user_id")
 	private int id;
-	
+
 	@Column(name = "email")
 	@Email(message = "*Please provide a valid Email")
 	@NotEmpty(message = "*Please provide an email")
 	private String email;
-	
+
 	@Column(name = "password")
 	@Length(min = 5, message = "*Your password must have at least 5 characters")
 	@NotEmpty(message = "*Please provide your password")
 	@Transient
 	private String password;
-	
+
 	@Column(name = "first_name")
-	//@NotEmpty(message = "*Please provide your first name")
+	// @NotEmpty(message = "*Please provide your first name")
 	private String name;
-	
+
 	@Column(name = "last_name")
-	//@NotEmpty(message = "*Please provide your last name")
+	// @NotEmpty(message = "*Please provide your last name")
 	private String lastName;
-	
+
 	@Column(name = "date_of_birth")
 	private Date dob;
-	
+
 	@Column(name = "current_grade")
 	private String grade;
-	
+
 	@Column(name = "gender")
 	private String gender;
-	
+
 	@Column(name = "mobile_number")
-	//@Length(min = 7, message = "*Your phone number must have at least 7 digit")
+	// @Length(min = 7, message = "*Your phone number must have at least 7
+	// digit")
 	private Integer mobileNumber;
-	
+
 	@Column(name = "city")
 	private String city;
-	
+
 	@Column(name = "state")
 	private String state;
-	
+
 	@Column(name = "country")
 	private String country;
-	
+
 	@Column(name = "enabled")
 	private boolean active;
-	
+
 	@Column(name = "Is_Term_Of_Use_Accepted")
 	private boolean isTOSAccepted;
-	
+
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles;
@@ -198,8 +199,5 @@ public class Users {
 	public void setCountry(String country) {
 		this.country = country;
 	}
-	
-	
 
 }
-
