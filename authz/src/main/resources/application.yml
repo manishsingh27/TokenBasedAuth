@@ -13,8 +13,8 @@ logging:
         security: DEBUG
              
 facebook:
-  appKey: addYours
-  appSecret: addYours
+  appKey: addYour
+  appSecret: addYour
   
 token:
   secret: willremvoeit
