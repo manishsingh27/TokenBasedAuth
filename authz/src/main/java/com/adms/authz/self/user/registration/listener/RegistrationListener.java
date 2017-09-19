@@ -53,7 +53,7 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
         final String recipientAddress = user.getEmail();
         
         final String confirmationUrl = event.getAppUrl() + "/uaa/v1/api/user/registrationConfirm?token=" + token;
-        final String message = "You have been successfully registered. Please click below link to activate your xpluyz account.";
+        final String message = "You have been successfully registered. Please click below link to activate your xplusyz account.";
         		//messages.getMessage("message.regSucc", null, event.getLocale());
         final SimpleMailMessage email = new SimpleMailMessage();
         email.setTo(recipientAddress);

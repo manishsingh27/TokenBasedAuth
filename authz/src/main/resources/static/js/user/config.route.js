@@ -49,6 +49,61 @@
 
                 }
             })
+
+               .state('forgotPWPage', {
+
+                url: '/forgotPWPage',
+                
+                views: {
+                                      
+                        container: {
+                            templateUrl: 'view/forgotPWPage.html',
+                            controller: "UserController as vm"
+                    }
+
+                }
+            })
+
+                .state('forgotPWSuccessPage', {
+
+                url: '/forgotPWSuccessPage',
+                
+                views: {
+                                      
+                        container: {
+                            templateUrl: 'view/forgotPWSuccessPage.html',
+                            controller: "UserController as vm"
+                    }
+
+                }
+            })
+
+                .state('updatePassword', {
+
+                url: '/updatePassword',
+                
+                views: {
+                                      
+                        container: {
+                            templateUrl: 'view/updatePassword.html',
+                            controller: "UserController as vm"
+                    }
+
+                }
+            })
             
+              .state('passwordResetSuccessPage', {
+
+                url: '/passwordResetSuccessPage',
+                
+                views: {
+                                      
+                        container: {
+                            templateUrl: 'view/pwResetSuccessPage.html',
+                            controller: "UserController as vm"
+                    }
+
+                }
+            })
     }
 })();

@@ -25,5 +25,11 @@ public interface UsersService {
 	
 	Users getUser(String verificationToken);
 	
+	void createPasswordResetTokenForUser(Users user, String token);
+	
+	String validatePasswordResetToken(long id, String token);
+	
+	void changeUserPassword(Users user, String password);
+	
 	UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException;
 }

@@ -1,19 +1,20 @@
 security:
   user:
     password: none
+  #sessions: always
   
 logging:
   level:
     org:
       
-      hibernate:  DEBUG
+     #hibernate:  DEBUG
       springframework:
         web:  DEBUG
         security: DEBUG
              
 facebook:
-  appKey: 1896232807325142
-  appSecret: 64096be669990079e7120465bc65de01
+  appKey: addYours
+  appSecret: addYours
   
 token:
   secret: willremvoeit
@@ -29,10 +30,10 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/local-idp-xplusyz-db
     username: idpuser
-    password: test123!
+    password: addYours
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: validate
     showSql: true 
   queries:
     users-query: select email, password, enabled from users where email=?
@@ -42,8 +43,8 @@ spring:
     host: smtp.sendgrid.net
     port: 465
     protocol: smtps
-    username: azure_82d63a8199cb145e13ffd8dffcf3b801@azure.com
-    password: test123!
+    username: AddYours
+    password: AddYours
     properties:
       mail:
         transport:
@@ -75,10 +76,10 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/local-idp-xplusyz-db
     username: idpuser
-    password: test123!
+    password: addYours
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: validate
     showSql: true 
   queries:
     users-query: select email, password, enabled from users where email=?
@@ -88,8 +89,8 @@ spring:
     host: smtp.sendgrid.net
     port: 465
     protocol: smtps
-    username: azure_82d63a8199cb145e13ffd8dffcf3b801@azure.com
-    password: test123!
+    username: addYours
+    password: addYours
     properties:
       mail:
         transport:
@@ -133,8 +134,8 @@ spring:
     host: email-smtp.us-east-1.amazonaws.com
     port: 2525
     protocol: smtps
-    username: AKIAJIKXZAQFFJDXI4VQ
-    password: 
+    username: addYours
+    password: addYours
     properties:
       mail:
         transport:

@@ -16,7 +16,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http
 			.logout().logoutSuccessUrl("/index.html").and()
 			.authorizeRequests()
-				.antMatchers("/index.html", "/home.html", "/", "/login", "/uaa/v1/api/user/registrationConfirm").permitAll()
+				.antMatchers("/index.html", "/home.html", "/passwordReset", "/", "/login", "/uaa/v1/api/user/registrationConfirm", "/uaa/v1/api/user/changePassword").permitAll()
 				.anyRequest().authenticated()
 				.and()
 			.csrf()

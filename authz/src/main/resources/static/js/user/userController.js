@@ -5,19 +5,50 @@ angular.module('app.user').controller('UserController', ['$scope', '$state', 'Us
 	function($scope, $state, UserService, $stateParams) {
     var vm = this;
     vm.user={email:'',password:''};
+    vm.PasswordDto={newPassword:''};
     vm.users=[];
     vm.successMsg= $stateParams.success;
     console.info($stateParams.success);
 
     vm.submit = submit;
+    vm.pwReset = pwReset;
     vm.edit = edit;
     vm.remove = remove;
     vm.reset = reset;
     vm.createUser = createUser;
+    vm.changePassword = changePassword;
     var registration = registration;
-
-
+  
     //fetchAllUsers();
+
+   
+     function changePassword(){
+        UserService.changePassword(vm.PasswordDto)
+            .then(
+            function(successResponse){
+                console.info('Password has been  changed');
+               // $state.go("passwordResetSuccessPage");
+               
+                window.location.href = successResponse.payload;
+            },
+            function(errResponse){
+                console.error('Error while password chnange');
+            }
+        );
+    }
+
+     function pwReset(){
+        UserService.pwReset(vm.user)
+            .then(
+            function(successResponse){
+                console.info('Password eMail has been sent');
+                $state.go("forgotPWSuccessPage");
+            },
+            function(errResponse){
+                console.error('Error while password reset');
+            }
+        );
+    }
 
     function fetchAllUsers(){
         UserService.fetchAllUsers()
@@ -92,7 +123,7 @@ angular.module('app.user').controller('UserController', ['$scope', '$state', 'Us
 
     function reset(){
         vm.user={id:null,username:'',address:'',email:''};
-        $scope.myForm.$setPristine(); //reset Form
+        $scope.userForm.$setPristine(); //reset Form
     }
 
 var userSuccess = function(data) {

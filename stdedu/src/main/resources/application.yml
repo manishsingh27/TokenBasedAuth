@@ -1,8 +1,10 @@
 logging:
   level:
     org:
-      springframework:
-        security: DEBUG
+      springframework:           
+        web: debug
+        security: debug
+
 spring:
   profiles: default
 server:

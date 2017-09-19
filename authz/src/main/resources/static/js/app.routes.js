@@ -9,7 +9,9 @@
             /*var header = {
                 templateUrl: '/view/headers.html',
             };*/
-    	 	$urlRouterProvider.when('/login', '/loginPage');   	 	
+    	 	$urlRouterProvider.when('/login', '/loginPage');
+            $urlRouterProvider.when('/updatePassword', '/updatePassword');
+            $urlRouterProvider.when('/passwordResetSuccessPage', '/passwordResetSuccessPage'); 
             $urlRouterProvider.otherwise('/login');
 
         }

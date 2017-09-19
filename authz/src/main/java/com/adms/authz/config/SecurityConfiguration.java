@@ -1,4 +1,4 @@
-package com.adms.authz.config;
+/*package com.adms.authz.config;
 
 import javax.sql.DataSource;
 
@@ -10,6 +10,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -24,6 +25,7 @@ import com.adms.authz.social.handler.SocialAuthenticationSuccessHandler;
 import com.adms.authz.user.service.SocialUserService;
 
 @Configuration
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 @Order(-20)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
@@ -74,11 +76,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http
 			.formLogin().loginPage("/login").permitAll()
 		.and()
-			.requestMatchers().antMatchers("/login", "/oauth/authorize", "/oauth/confirm_access", "/auth/**", "/v1/user", "/view/register.html", "/view/headers.html", 
-					"/view/login.html","/view/regHeaders.html", "/v1/api/user/registrationConfirm*")
+			.requestMatchers().antMatchers("/login", "/oauth/authorize", "/oauth/confirm_access", "/auth/**", "/view/register.html", "/v1/user", "/view/headers.html",
+					"/view/login.html", "/view/regHeaders.html", "/view/forgotPWPage.html",
+					"/view/forgotPWSuccessPage.html", "/v1/api/user/registrationConfirm*",
+					"/v1/user/resetPassword", "/v1/api/user/changePassword*")
 		.and()
 			.authorizeRequests()
-			.antMatchers("/view/register.html", "/v1/user", "/view/headers.html", "/view/login.html", "/view/regHeaders.html", "/v1/api/user/registrationConfirm*").permitAll()
+			.antMatchers("/logout*", "/view/register.html", "/v1/user", "/view/headers.html",
+					"/view/login.html", "/view/regHeaders.html", "/view/forgotPWPage.html",
+					"/view/forgotPWSuccessPage.html", "/v1/api/user/registrationConfirm*",
+					"/v1/user/resetPassword", "/v1/api/user/changePassword*").permitAll()
+			//.antMatchers("/view/register.html", "/v1/user", "/view/headers.html", "/view/login.html", "/view/regHeaders.html", "/v1/api/user/registrationConfirm*")
+			//.permitAll()
 			.anyRequest().authenticated().and()
 			.csrf().disable()
 			// add custom authentication filter for complete stateless JWT based authentication
@@ -89,11 +98,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		// @formatter:on
 	}
 	
-	/*@Bean
+	@Bean
 	@Override
 	public AuthenticationManager authenticationManager() throws Exception {
 		return super.authenticationManager();
-	}*/
+	}
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -101,14 +110,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		auth.userDetailsService(userDetailsService)
 			.passwordEncoder(bCryptPasswordEncoder);
 		
-		/*auth.
+		auth.
 		jdbcAuthentication()
 			.usersByUsernameQuery(usersQuery)
 			.authoritiesByUsernameQuery(rolesQuery)
 			.dataSource(dataSource)
-			.passwordEncoder(bCryptPasswordEncoder);*/
+			.passwordEncoder(bCryptPasswordEncoder);
 		
-		/*auth.inMemoryAuthentication()
+		auth.inMemoryAuthentication()
 		.withUser("reader")
 		.password("reader")
 		.authorities("ROLE_READER")
@@ -119,14 +128,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.and()
 		.withUser("guest")
 		.password("guest")
-		.authorities("ROLE_GUEST");*/
+		.authorities("ROLE_GUEST");
 	}
 
-	/*@Override
+	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.parentAuthenticationManager(authenticationManager);
-	}*/
+	}
 	
 
 
 }
+*/
