@@ -7,4 +7,4 @@ This is a authetication and autorization sample application based on Spring and 
 
     stdedu - Resource Server application.
 
-Please go to this link http://proficientblog.com/microservices-security/ to under the basic of token base security, Oauth2, OpenID Connect and Gateway pattern.
+Please go to this link http://proficientblog.com/microservices-security/ to understand the basic of token base security, Oauth2, OpenID Connect and Gateway pattern.
